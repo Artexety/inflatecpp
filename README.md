@@ -7,7 +7,7 @@
 
 In the future, I will probably add gzip format support according to: [RFC 1952: GZIP specification](https://www.ietf.org/rfc/rfc1952.txt)
 
-"Artexety/inflate" is less than 900 lines of C++ (excluding aproximatly 150 lines of the adler checksum implementation), and decompresses faster than the original zlib function.
+"Artexety/inflate" is less than 900 lines of C++ (excluding aproximatly 150 lines of the adler checksum implementation), and decompresses faster than the original zlib method.
 
 Decompressing large raw texture file (zlib bitstream, 60,132,846 bytes compressed to 25,614,357):
 
