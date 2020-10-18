@@ -1,4 +1,9 @@
 # inflate
-A [DEFLATE](http://www.gzip.org/zlib/rfc-deflate.html) decompressor written in c++.
+=========
+Artexety/inflate is a single function call (optional), memory-to-memory decompressor for the zlib and deflate bitstream formats:
 
-This library provides functionality to decompress data compressed with the DEFLATE algorithm (zlib header/trailer is neccessary).
+[RFC 1950: ZLIB specification](https://www.ietf.org/rfc/rfc1950.txt)
+
+[RFC 1951: DEFLATE specification](https://www.ietf.org/rfc/rfc1951.txt)
+
+In the future, I will probably add gzip format support according to [RFC 1952: GZIP specification](https://www.ietf.org/rfc/rfc1952.txt)
