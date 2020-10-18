@@ -12,9 +12,9 @@ In the future, I will probably add gzip format support according to: [RFC 1952: 
 Decompressing large raw texture file (zlib bitstream, 60,132,846 bytes compressed to 25,614,357):
 
     Decompressor                              Time (microseconds), core i7
-    zlib inflate                              127,945 (100%)
-    "Artexety/inflate" (with checksum)        114,369 (91%)
-    "Artexety/inflate" (without checksum)     105,476 (85%)
+    zlib inflate                              134,245 (100%)
+    "Artexety/inflate" (with checksum)        118,399 (91%)
+    "Artexety/inflate" (without checksum)     110,238 (85%)
 
 # How to use it
 First, you need to add all the src files of this repository to your project. Then include "decompressor.h" in your code and you are done. 
