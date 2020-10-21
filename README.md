@@ -68,5 +68,5 @@ int main(int argc, const char *argv[])
 ```
 ---
 ## License
-__Inflate++__ is developed by Artexety inspired by Mark Adlers zlib decompression. The adler checksum compution by [Mark Adler](https://github.com/madler). All code is licensed under the [permissive free software license (MIT)](https://mit-license.org). All mentions are included in the source code.
+__Inflate++__ is developed by Artexety inspired by Mark Adlers zlib decompression. The adler checksum compution by [Mark Adler](https://github.com/madler). All code is licensed under the [permissive free software license (MIT)](https://mit-license.org). All mentions are included in the source code aswell.
 
