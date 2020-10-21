@@ -1,4 +1,6 @@
 # inflate
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](http://goldsborough.mit-license.org)
+
 "Artexety/inflate" is a single function call (optional), memory-to-memory decompressor for the zlib and deflate bitstream formats:
 
 [RFC 1950: ZLIB specification](https://www.ietf.org/rfc/rfc1950.txt)
