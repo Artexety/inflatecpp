@@ -31,7 +31,7 @@ You can use the "decompressor.h" as follows:
 
 #include "<dir>\decompressor.h"
 
-int main(int argc, char *argv[])
+int main(int argc, const char *argv[])
 {
 	Decompressor example_decompressor = Decompressor();
 
