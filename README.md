@@ -18,7 +18,7 @@ Decompressing large raw texture file (zlib bitstream, 60,132,846 bytes compresse
     Inflate++ (with checksum)        118,399 (91%)
     Inflate++ (without checksum)     110,238 (85%)
 ---
-## Usage
+## Usage / How to use it
 First, you need to include all source files given in this repository to your project. Then include "decompressor.h" in your code and you are done. 
 
 You can use the "decompressor.h" as follows:
@@ -45,7 +45,8 @@ int main(int argc, const char *argv[])
 
 	unsigned int decompressed_data_size = example_decompressor.Feed(compressed_data_size,
 		compressed_data_size, decompressed_data, max_decompressed_data_size, true);
-	
+		// Use "true" as fifth argument of "Feed()" if you want to use the checksum
+		
 	if(decompressed_data_size == -1)
 	{
 		std::cout << "decompression error!" << std::endl;
