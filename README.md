@@ -19,3 +19,48 @@ Decompressing large raw texture file (zlib bitstream, 60,132,846 bytes compresse
 This project is developed by Artexety inspired by Mark Adlers zlib decompression. The adler checksum compution by Mark Adler. All code is licensed under the [permissive free software license (MIT)](https://mit-license.org). All mentions are included in the source code.
 # How to use it
 First, you need to include all source files given in this repository to your project. Then include "decompressor.h" in your code and you are done. 
+
+You can use the "decompressor.h" as follows:
+
+```C++
+
+#include <iostream>
+#include <stdio.h>
+
+#include "<dir>\decompressor.h"
+
+int main(int argc, char *argv[])
+{
+	Decompressor example_decompressor = Decompressor();
+
+	unsigned int compressed_data_size = ...
+	unsigned int max_decompressed_data_size = 200000000; // As an example
+	unsigned char *compressed_data = new unsigned char[compressed_data_size];
+	unsigned char *decompressed_data = new unsigned char[max_decompressed_data_size];
+
+	// ...
+	// assign values to "compressed_data"  
+	// ...
+
+	unsigned int decompressed_data_size = example_decompressor.Feed(compressed_data_size,
+		compressed_data_size, decompressed_data, max_decompressed_data_size, true);
+	
+	if(decompressed_data_size == -1)
+	{
+		std::cout << "decompression error!" << std::endl;
+		delete [] compressed_data;
+		delete [] decompressed_data;
+
+		return 0;
+	}
+
+	std::cout << "decompressed " << decompressed_data_size << " bytes";
+
+	// ...
+	// use the decompressed data stored in "decompressed_data"
+	// ...
+
+	return 0;
+}
+
+```
