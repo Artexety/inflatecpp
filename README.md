@@ -43,7 +43,7 @@ int main(int argc, const char *argv[])
 	// assign values to "compressed_data"  
 	// ...
 
-	unsigned int decompressed_data_size = example_decompressor.Feed(compressed_data_size,
+	unsigned int decompressed_data_size = example_decompressor.Feed(compressed_data,
 		compressed_data_size, decompressed_data, max_decompressed_data_size, true);
 		// Use "true" as fifth argument of "Feed()" if you want to use the checksum
 		
