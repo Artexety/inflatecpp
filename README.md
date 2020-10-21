@@ -7,7 +7,7 @@ __Inflate++__ is a single function call (optional), memory-to-memory decompresso
 
 [RFC 1951: DEFLATE specification](https://www.ietf.org/rfc/rfc1951.txt)
 
-In the future, I will probably add gzip format support according to: [RFC 1952: GZIP specification](https://www.ietf.org/rfc/rfc1952.txt)
+In the future, I will probably add [gzip](https://www.ietf.org/rfc/rfc1952.txt) format support.
 
 __Inflate++__ is less than 900 lines of C++ (excluding aproximatly 100 lines of the adler checksum implementation), and decompresses faster than the original zlib method.
 
