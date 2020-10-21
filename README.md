@@ -18,8 +18,6 @@ Decompressing large raw texture file (zlib bitstream, 60,132,846 bytes compresse
     Inflate++ (with checksum)        118,399 (91%)
     Inflate++ (without checksum)     110,238 (85%)
 
-This project is developed by Artexety inspired by Mark Adlers zlib decompression. The adler checksum compution by Mark Adler. All code is licensed under the [permissive free software license (MIT)](https://mit-license.org). All mentions are included in the source code.
-
 ## Usage
 First, you need to include all source files given in this repository to your project. Then include "decompressor.h" in your code and you are done. 
 
@@ -67,3 +65,7 @@ int main(int argc, const char *argv[])
 }
 
 ```
+
+## License
+Inflate++ is developed by Artexety inspired by Mark Adlers zlib decompression. The adler checksum compution by Mark Adler. All code is licensed under the [permissive free software license (MIT)](https://mit-license.org). All mentions are included in the source code.
+
