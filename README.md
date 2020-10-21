@@ -1,4 +1,4 @@
-# inflate++
+# Inflate++
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](http://goldsborough.mit-license.org)
 
 "Inflate++" is a single function call (optional), memory-to-memory decompressor for the zlib and deflate bitstream formats:
