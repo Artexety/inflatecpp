@@ -20,7 +20,7 @@ Decompressing large raw texture file (zlib bitstream, 60,132,846 bytes compresse
     
 Decompressing GZIP format archive (gzip bitstream, 147,120,395 bytes compressed to 53,625,384):
 
-    Decompressor                      Time (microseconds), 
+    Decompressor                      Time (microseconds) 
     zlib inflate 1.2.11               465,567 (100%)
     Inflate++ (with checksum)         362,133 (87%)
     Inflate++ (without checksum)      265,462 (65%)
