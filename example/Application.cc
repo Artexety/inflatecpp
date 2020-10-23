@@ -2,7 +2,7 @@
 #include <fstream>
 #include <stdio.h>
 
-#include "source\decompressor.h"
+#include "decompressor.h"
 
 int main(int argc, const char *argv[])
 {
