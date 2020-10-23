@@ -2,6 +2,7 @@
 #define _DECOMPRESSOR_H
 
 #include <iostream>
+#include <cstring>
 #include <stdio.h>
 
 #include "bit_reader.h"

@@ -172,7 +172,7 @@ unsigned int DecompressBlock(BitReader *bit_reader, int dynamic_block, unsigned 
 
 					do 
 					{
-						memcpy(copy_dst, copy_src, 16);
+						std::memcpy(copy_dst, copy_src, 16);
 						copy_src += 16;
 						copy_dst += 16;
 					} 
