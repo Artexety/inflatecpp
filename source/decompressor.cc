@@ -199,6 +199,8 @@ unsigned int DecompressBlock(BitReader *bit_reader, int dynamic_block, unsigned 
 	return (unsigned int)(current_out - (out + out_offset));
 }
 
+enum ChecksumType { kNone = 0, kGZIP = 1, kZLIB = 2 };
+
 /**
  * Inflate zlib data
  *
@@ -218,12 +220,75 @@ unsigned int Decompressor::Feed(const void *compressed_data, unsigned int compre
 	unsigned int current_out_offset;
 	unsigned long check_sum = 0;
 
+	ChecksumType checksum_type = ChecksumType::kNone;
 	BitReader bit_reader;
 
 	if ((current_compressed_data + 2) > end_compressed_data) 
 		return -1;
 
-	if ((current_compressed_data[0] & 0x0f) == 0x08) 
+	if(current_compressed_data[0] == 0x1f && current_compressed_data[1] == 0x8b)
+	{
+		current_compressed_data += 2;
+      	if ((current_compressed_data + 8) > end_compressed_data || current_compressed_data[0] != 0x08)
+			return -1;
+      	
+		current_compressed_data++;
+		
+      	unsigned char flags = *current_compressed_data++;
+      	current_compressed_data += 6;
+
+      	if (flags & 0x02) 
+		{      
+         	if ((current_compressed_data + 2) > end_compressed_data) 
+			 	return -1;
+         	
+			current_compressed_data += 2;
+      	}
+
+      	if (flags & 0x04) 
+		{     
+         	if ((current_compressed_data + 2) > end_compressed_data) 
+			 	return -1;
+			
+         	unsigned short extra_field_len = ((unsigned short)current_compressed_data[0]) | (((unsigned short)current_compressed_data[1]) << 8);
+         	current_compressed_data += 2;
+
+         	if ((current_compressed_data + extra_field_len) > end_compressed_data) 
+			 	return -1;
+         	
+			current_compressed_data += extra_field_len;
+      	}
+
+      	if (flags & 0x08) 
+	  	{       
+        	do 
+		 	{
+            	if (current_compressed_data >= end_compressed_data) 
+					return -1;
+            	
+				current_compressed_data++;
+         	} 
+			while (current_compressed_data[-1]);
+      	}
+
+      	if (flags & 0x10) 
+		{      
+         	do 
+			{
+            	if (current_compressed_data >= end_compressed_data) 
+					return -1;
+            	
+				current_compressed_data++;
+         	} 
+			while (current_compressed_data[-1]);
+      	}
+
+      	if (flags & 0x20) 
+        	return -1;
+
+      	checksum_type = ChecksumType::kGZIP;
+	}
+	else if ((current_compressed_data[0] & 0x0f) == 0x08) 
 	{
 		unsigned char CMF = current_compressed_data[0];
 		unsigned char FLG = current_compressed_data[1];
@@ -239,9 +304,11 @@ unsigned int Decompressor::Feed(const void *compressed_data, unsigned int compre
 				current_compressed_data += 4;
 			}
 		}
+
+		checksum_type = ChecksumType::kZLIB;
 	}
 
-	if (checksum)
+	if (checksum && checksum_type == ChecksumType::kZLIB)
 		check_sum = adler32_z(0, nullptr, 0);
 
 	bit_reader.Init(current_compressed_data, end_compressed_data);
@@ -277,7 +344,18 @@ unsigned int Decompressor::Feed(const void *compressed_data, unsigned int compre
 			return -1;
 
 		if(checksum)
-			check_sum = adler32_z(check_sum, out + current_out_offset, block_result);
+		{
+			switch (checksum_type)
+			{
+			case ChecksumType::kGZIP:
+				check_sum = crc32_4bytes(out + current_out_offset, block_result, check_sum);
+				break;
+			
+			case ChecksumType::kZLIB:
+				check_sum = adler32_z(check_sum, out + current_out_offset, block_result);
+				break;
+			}
+		}
 
 		current_out_offset += block_result;
 	} 
@@ -287,20 +365,41 @@ unsigned int Decompressor::Feed(const void *compressed_data, unsigned int compre
 	current_compressed_data = bit_reader.GetInBlock();
 	
 	if (checksum)
-	{
+	{	
 		unsigned int stored_check_sum;
-		if ((current_compressed_data + 4) > end_compressed_data)
-			return -1;
 
-		stored_check_sum = ((unsigned int)current_compressed_data[0]) << 24;
-		stored_check_sum |= ((unsigned int)current_compressed_data[1]) << 16;
-		stored_check_sum |= ((unsigned int)current_compressed_data[2]) << 8;
-		stored_check_sum |= ((unsigned int)current_compressed_data[3]);
+		switch (checksum_type)
+		{
+		case ChecksumType::kGZIP:
+				if ((current_compressed_data + 4) > end_compressed_data) 
+					return -1;
+				
+      			stored_check_sum = ((unsigned int)current_compressed_data[0]);
+      			stored_check_sum |= ((unsigned int)current_compressed_data[1]) << 8;
+      			stored_check_sum |= ((unsigned int)current_compressed_data[2]) << 16;
+      			stored_check_sum |= ((unsigned int)current_compressed_data[3]) << 24;
+      
+	  			if (stored_check_sum != check_sum) 
+				  	return -1;
+      			
+				current_compressed_data += 4;
+				break;
+			
+			case ChecksumType::kZLIB:
+				if ((current_compressed_data + 4) > end_compressed_data)
+					return -1;
 
-		if (stored_check_sum != check_sum)
-			return -1;
+				stored_check_sum = ((unsigned int)current_compressed_data[0]) << 24;
+				stored_check_sum |= ((unsigned int)current_compressed_data[1]) << 16;
+				stored_check_sum |= ((unsigned int)current_compressed_data[2]) << 8;
+				stored_check_sum |= ((unsigned int)current_compressed_data[3]);
 
-		current_compressed_data += 4;
+				if (stored_check_sum != check_sum)
+					return -1;
+
+				current_compressed_data += 4;
+				break;
+		}
 	}
 
 	return current_out_offset;

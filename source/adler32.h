@@ -22,11 +22,11 @@
   (zlib format), rfc1951 (deflate format) and rfc1952 (gzip format).
  */
 
-#include <iostream>
-#include <stdio.h>
-
 #ifndef _ADLER_32_H
 #define _ADLER_32_H
+
+#include <iostream>
+#include <stdio.h>
 
 #define BASE 65521U
 #define NMAX 5552

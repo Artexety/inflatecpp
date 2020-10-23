@@ -7,6 +7,7 @@
 #include "bit_reader.h"
 #include "huffman_decoder.h"
 #include "adler32.h"
+#include "crc32.h"
 
 #define MATCHLEN_PAIR(__base,__dispbits) ((__base) | ((__dispbits) << 16) | 0x8000)
 #define OFFSET_PAIR(__base,__dispbits) ((__base) | ((__dispbits) << 16))
