@@ -1,5 +1,6 @@
 # Inflate++
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](http://goldsborough.mit-license.org)
+[![GitHub issues](https://img.shields.io/github/issues/Artexety/inflatecpp?style=flat-square)](https://github.com/Artexety/inflatecpp)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/Artexety/inflatecpp)
 
 __Inflate++__ is a single function call (optional), memory-to-memory decompressor for the zlib and deflate bitstream formats:
 
