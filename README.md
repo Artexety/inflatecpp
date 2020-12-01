@@ -1,4 +1,5 @@
 # Inflate++
+[![Code Size](https://img.shields.io/github/languages/code-size/Artexety/inflatecpp?style=flat-square)](https://github.com/Artexety/inflatecpp)
 [![GitHub issues](https://img.shields.io/github/issues/Artexety/inflatecpp?style=flat-square)](https://github.com/Artexety/inflatecpp)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/Artexety/inflatecpp)
 
