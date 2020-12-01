@@ -28,7 +28,7 @@ Decompressing GZIP format archive (gzip bitstream, 147,120,395 bytes compressed 
     Inflate++ (without checksum)      265,462 (65%)
     
 ---
-## Usage / How to use it
+## Usage
 First, you need to include all source files given in this repository to your project. Then include "decompressor.h" in your code and you are done. 
 
 You can use the "decompressor.h" as follows:
