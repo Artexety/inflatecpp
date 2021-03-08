@@ -77,7 +77,7 @@ int main(int argc, const char *argv[])
 
 ```
 [See example](https://github.com/Artexety/inflatecpp/blob/main/example/Application.cc)
-NOTE: To build the example just run __build.bat__ in the command prompt. 
+NOTE: To build the example just run __build.bat__ in the command prompt (windows). 
 
 ---
 ## License
