@@ -26,7 +26,7 @@ int main(int argc, const char *argv[])
 	unsigned int compressed_data_size = input_file.tellg();
 	input_file.seekg(0, std::ios::beg);
 
-	unsigned int max_decompressed_data_size = 200000000; // As an example
+	unsigned int max_decompressed_data_size = 200000000; // As an example (max buffer size)
 	unsigned char *compressed_data = new unsigned char[compressed_data_size];
 	unsigned char *decompressed_data = new unsigned char[max_decompressed_data_size];
 
