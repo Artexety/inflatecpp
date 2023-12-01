@@ -8,7 +8,7 @@ unsigned int CopyStored(BitReader *bit_reader, unsigned char *out, unsigned int 
 	if ((bit_reader->GetInBlock() + 4) > bit_reader->GetInBlockEnd())
 		return -1;
 
-	unsigned short stored_length = ((unsigned short)bit_reader->GetInBlock()[0]) | (((unsigned short)bit_reader->GetInBlock()[0]) << 8);
+	unsigned short stored_length = ((unsigned short)bit_reader->GetInBlock()[0]) | (((unsigned short)bit_reader->GetInBlock()[1]) << 8);
 	bit_reader->ModifyInBlock(2);
 
 	unsigned short neg_stored_length = ((unsigned short)bit_reader->GetInBlock()[0]) | (((unsigned short)bit_reader->GetInBlock()[1]) << 8);
